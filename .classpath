@@ -40,5 +40,8 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/lib/jersey-media-json-binding.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/lib/jersey-media-sse.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/lib/jersey-server.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jar_files(1)/jackson-annotations-2.9.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jar_files(1)/jackson-core-2.9.6.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jar_files(1)/jackson-databind-2.9.6.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

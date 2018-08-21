@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.Statement;
 
 import javax.servlet.ServletException;
@@ -14,16 +13,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Registration
+ * Servlet implementation class Remove_from_cart
  */
-@WebServlet("/Registration")
-public class Registration extends HttpServlet {
+@WebServlet("/Remove_from_cart")
+public class Remove_from_cart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Registration() {
+    public Remove_from_cart() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,30 +40,39 @@ public class Registration extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	//	doGet(request, response);
-		String input_username , input_password , sql ;
-		input_username =  request.getParameter("username");
-		input_password =  request.getParameter("password");
-		sql = "INSERT INTO registration(user_name,password)" + " VALUES(?,?)";
-		try {
-			Class.forName("com.mysql.jdbc.Driver");  
-    		Connection con=DriverManager.getConnection(  
-    		"jdbc:mysql://localhost:3306/details","root","rohit263");
-    		//here details is database name, root is username and rohit263 is password
-    		PreparedStatement pstmt = con.prepareStatement(sql);
-    		pstmt.setString(1,input_username);
-    		pstmt.setString(2,input_password);
-    		pstmt.execute();
-    		response.getWriter().append("Registered Succesfully");
-    		//Statement stmt=con.createStatement();  
-    		//esultSet rs=stmt.executeQuery("select * from registration");
-    		//stmt.executeQuery("insert into registration values(@username,@password)");
-    		con.close();
-		}
-		catch(Exception e){
-			 System.out.println(e);
-		}
-		
+		//doGet(request, response);
 	}
 
+	/**
+	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
+	 */
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+	}
+
+	/**
+	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
+	 */
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
+		
+		String username , item , sql ;
+		username = request.getParameter("username");
+		response.getWriter().append(username);
+		item = request.getParameter("item");
+		response.getWriter().append(item);
+		sql = "DELETE FROM cart WHERE username='"+username+"' and item='"+item+"'";
+		try {
+			Class.forName("com.mysql.jdbc.Driver");  
+    		Connection con = DriverManager.getConnection(  
+    		"jdbc:mysql://localhost:3306/details","root","rohit263");
+    		PreparedStatement stmt = con.prepareStatement(sql);
+    		stmt.execute();
+    		response.getWriter().append("Deleted Successfully");
+    		con.close();
+	}catch(Exception e) {
+		response.getWriter().append("error");
+		}
+	}
 }
